@@ -98,7 +98,9 @@ public class DriveTrain extends SubsystemBase {
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
     m_leftFront.configOpenloopRamp(0.5);
+    // Function that automatically ramps up the speed in order not to waste the battery
     m_leftFront.configVoltageCompSaturation(12.0);
+    // Function that takes in what the max voltage on the battery should be in order to account for it if the battery does end up having low battery
     m_leftFront.enableVoltageCompensation(true);
     m_leftBack = new WPI_VictorSPX(Constants.leftBack); 
     m_leftBack.configOpenloopRamp(0.5);
