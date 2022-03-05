@@ -15,6 +15,7 @@ public class RightBackScoreAuton extends SequentialCommandGroup {
   public RightBackScoreAuton(DriveTrain dt, Dumper d) {
     addCommands(new DriveToDistance(dt, 1.80f), 
       new TurnToAngle(dt, 15.0f), 
+      new DriveToDistance(dt, 0.05f),
       new DumperVomit(d).raceWith(new Wait(2.5f)), 
       new DriveToDistance(dt, -4.0f)
     );

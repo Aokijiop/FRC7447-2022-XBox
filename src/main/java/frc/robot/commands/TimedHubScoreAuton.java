@@ -4,7 +4,9 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
 
@@ -12,13 +14,13 @@ import frc.robot.subsystems.Dumper;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TimedHubScoreAuton extends SequentialCommandGroup {
-  Wait m_wait;
-
   /** Creates a new TimerTerminalSideScoreAuton. */
   public TimedHubScoreAuton(Dumper d, DriveTrain dt) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    m_wait = new Wait(3.0f);
-    addCommands(new DumperVomit(d).raceWith(m_wait), new DumperMove(d), new DriveTimed(dt, -0.3f, 5.0f));
+    addCommands(new DumperVomit(d).raceWith(new Wait(2.5f)), 
+      new DriveTimed(dt, -Constants.autonSpeed, 0.02f),
+      new ParallelCommandGroup(new DumperMove(d), new DriveTimed(dt, -Constants.autonSpeed, 3.0f))
+    );
   }
 }

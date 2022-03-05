@@ -38,7 +38,17 @@ public final class Constants {
     public static final double tSpeed = 0.5;
     public static final double speedBoost = 0.95;
     public static final double tSpeedBoost = 0.85;
-    public static final double autonSpeed = 0.3;
+    public static final double autonSpeed = 0.7;
+    public static final double autonTSpeed = 0.5;
+
+    /*
+    Timer values(ADJUST LATER, JUST ASSUME FOR CONSISTENCY):
+        Drive
+        0.05: 0.02f
+
+        Turn
+        180: 2.0f
+    */
 
     // Dumper Constants
     public static final double dumperPower = 1.0;
