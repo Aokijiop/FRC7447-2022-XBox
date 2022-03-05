@@ -18,15 +18,15 @@ public class RightBackDoubleScoreAuton extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     // Caution: There is a wall that is behind this ball. The initial driving value will have to be lower to compensate.
-    addCommands(new ParallelCommandGroup(new DriveToDistance(dt, 1.0f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(2.5f))), 
+    addCommands(new ParallelCommandGroup(new DriveToDistance(dt, 1.0f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(2.5f))),
+      new DriveToDistance(dt, -0.05f),
       new TurnToAngle(dt, 180.0f), 
       new DriveToDistance(dt, 2.5f), 
       new ParallelCommandGroup(new TurnToAngle(dt, 15.0f), new DumperMove(d)), 
       new DriveToDistance(dt, 0.05f), 
       new DumperVomit(d).raceWith(new Wait(2.5f)), 
       new DriveToDistance(dt, -0.05f), 
-      new TurnToAngle(dt, 180.0f), 
-      new DriveToDistance(dt, 2.5f)
+      new TurnToAngle(dt, 180.0f)
     );
 
     // Testing

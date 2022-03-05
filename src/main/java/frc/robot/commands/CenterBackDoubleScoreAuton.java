@@ -17,7 +17,7 @@ public class CenterBackDoubleScoreAuton extends SequentialCommandGroup {
   public CenterBackDoubleScoreAuton(DriveTrain dt, Dumper d) { 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new TurnToAngle(dt, 7.0f),
+    addCommands(new TurnToAngle(dt, -7.0f),
       new ParallelCommandGroup(new DumperMove(d), new DriveToDistance(dt, 1.66), new DumperIntake(d).raceWith(new Wait(3.0f)), 
       new TurnToAngle(dt, 7.0f)), 
       new ParallelCommandGroup(new DumperMove(d), new TurnToAngle(dt, 180.0f)), 

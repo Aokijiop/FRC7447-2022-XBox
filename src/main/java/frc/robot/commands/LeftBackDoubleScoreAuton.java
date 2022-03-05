@@ -20,13 +20,11 @@ public class LeftBackDoubleScoreAuton extends SequentialCommandGroup {
     addCommands(new ParallelCommandGroup(new DriveToDistance(dt, 1.5f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(3.0f))), 
       new TurnToAngle(dt, 180.0f), 
       new DriveToDistance(dt, 3.75f), 
-      new ParallelCommandGroup(new TurnToAngle(dt, -15.0f), 
-      new DumperMove(d)),
+      new ParallelCommandGroup(new TurnToAngle(dt, -15.0f), new DumperMove(d)),
       new DriveToDistance(dt, 0.05f), 
-      new DumperVomit(d).raceWith(new Wait(3.0f)), 
+      new DumperVomit(d).raceWith(new Wait(2.5f)), 
       new DriveToDistance(dt, -0.05f), 
-      new ParallelCommandGroup(new TurnToAngle(dt, 180.0f), new DumperMove(d)), 
-      new DriveToDistance(dt, 3.5f)
+      new ParallelCommandGroup(new TurnToAngle(dt, 180.0f), new DumperMove(d))
     );
 
     // Testing
