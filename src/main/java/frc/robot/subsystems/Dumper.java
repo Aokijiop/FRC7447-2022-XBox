@@ -5,9 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.XboxController;
@@ -23,6 +25,7 @@ public class Dumper extends SubsystemBase {
 
   public Dumper() {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
+    m_dumperIntakeOuttake.setNeutralMode(NeutralMode.Brake);
     m_dumperArm = new CANSparkMax(Constants.dumperArmPort, MotorType.kBrushless);
     m_armEncoder = m_dumperArm.getEncoder();
     }

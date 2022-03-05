@@ -37,6 +37,7 @@ public final class Constants {
     public static final double mSpeed = 0.7;
     public static final double tSpeed = 0.5;
     public static final double speedBoost = 0.95;
+    public static final double tSpeedBoost = 0.85;
     public static final double autonSpeed = 0.3;
 
     // Dumper Constants

@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -67,7 +66,7 @@ public class RobotContainer {
   private final TurnToAngle m_turnTo135cc;
 
   // Autonomous Commands
-  private final HubScoreAuton m_terminalSideScoreAuton;
+  private final HubScoreAuton m_hubScoreAuton;
   private final RightBackScoreAuton m_rBackScoreAuton;
   private final LeftBackScoreAuton m_lBackScoreAuton;
 
@@ -107,7 +106,7 @@ public class RobotContainer {
     // Commands
     m_driveManually = new DriveManually(m_driveTrain);
     m_driveManually.addRequirements(m_driveTrain);
-    // m_driveTrain.setDefaultCommand(m_driveManually); // Change back to m_driveManually
+    m_driveTrain.setDefaultCommand(m_driveManually);
     m_dumperHold = new DumperHold(m_dumper);
     m_dumper.setDefaultCommand(m_dumperHold);
     m_driveForwardTimed = new DriveTimed(m_driveTrain, Constants.autonSpeed, Constants.drive_fwd_time);
@@ -119,7 +118,6 @@ public class RobotContainer {
     m_dumperMove = new DumperMove(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
     m_encoderTest = new EncoderTest(m_driveTrain);
-    m_driveTrain.setDefaultCommand(m_driveManually);
  
 
     // Turn to Angle Commands
@@ -133,12 +131,12 @@ public class RobotContainer {
     m_turnTo135cc = new TurnToAngle(m_driveTrain, -135.0f);
 
     // Autonomous Commands
-    m_terminalSideScoreAuton = new HubScoreAuton(m_driveTrain, m_dumper);
+    m_hubScoreAuton = new HubScoreAuton(m_driveTrain, m_dumper);
     m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
     m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
-    m_chooser.setDefaultOption("Terminal Side Score", m_terminalSideScoreAuton);
+    m_chooser.setDefaultOption("Hub Score", m_hubScoreAuton);
     m_chooser.addOption("Right Back Score", m_rBackScoreAuton);
     m_chooser.addOption("Left Back Score", m_lBackScoreAuton);
     SmartDashboard.putData("Autonomous", m_chooser);
@@ -178,13 +176,10 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // bButton.toggleWhenPressed(m_driveForwardTimed, false);
-    LTrigger.whenHeld(m_dumperIntake);
-    RTrigger.whenHeld(m_dumperVomit);
-    RButton.whenHeld(m_boost);
-    LButton.toggleWhenPressed(m_dumperMove);
+    RButton.toggleWhenPressed(m_dumperMove);
     leftJoystickPress.whenHeld(m_boost);
     rightJoystickPress.whenHeld(m_boost);
-    bButton.toggleWhenPressed(m_encoderTest);
+    // bButton.toggleWhenPressed(m_encoderTest);
     // pov0.toggleWhenPressed(m_cancelTurnTo);
     // pov45.toggleWhenPressed(m_turnTo45);
     // pov90.toggleWhenPressed(m_turnTo90);

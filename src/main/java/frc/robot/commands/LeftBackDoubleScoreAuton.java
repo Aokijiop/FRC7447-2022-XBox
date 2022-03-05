@@ -17,6 +17,18 @@ public class LeftBackDoubleScoreAuton extends SequentialCommandGroup {
   public LeftBackDoubleScoreAuton(DriveTrain dt, Dumper d) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ParallelCommandGroup(new DriveToDistance(dt, 1.5f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(2.5f))), new TurnToAngle(dt, 180.0f), new DriveToDistance(dt, 3.75f), new ParallelCommandGroup(new TurnToAngle(dt, 15.0f), new DumperMove(d)), new DumperVomit(d).raceWith(new Wait(3.0f)), new TurnToAngle(dt, 180.0f), new DriveToDistance(dt, 3.5f));
+    addCommands(new ParallelCommandGroup(new DriveToDistance(dt, 1.5f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(3.0f))), 
+      new TurnToAngle(dt, 180.0f), 
+      new DriveToDistance(dt, 3.75f), 
+      new ParallelCommandGroup(new TurnToAngle(dt, -15.0f), 
+      new DumperMove(d)),
+      new DriveToDistance(dt, 0.05f), 
+      new DumperVomit(d).raceWith(new Wait(3.0f)), 
+      new DriveToDistance(dt, -0.05f), 
+      new ParallelCommandGroup(new TurnToAngle(dt, 180.0f), new DumperMove(d)), 
+      new DriveToDistance(dt, 3.5f)
+    );
+
+    // Testing
   }
 }
