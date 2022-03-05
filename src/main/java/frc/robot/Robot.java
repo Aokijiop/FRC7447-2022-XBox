@@ -15,6 +15,8 @@ import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -33,6 +35,7 @@ public class Robot extends TimedRobot {
 
   private final PowerDistribution m_PowerDistr = new PowerDistribution(0, ModuleType.kCTRE);
   Thread m_visionThread;
+  Timer m_timer = new Timer();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -148,6 +151,16 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    m_timer.reset();
+    m_timer.start();
+    while (m_timer.get() < 3.0f) {
+      RobotContainer.m_joystick.setRumble(RumbleType.kLeftRumble, 1);
+      RobotContainer.m_joystick.setRumble(RumbleType.kRightRumble, 1);
+    }
+    RobotContainer.m_joystick.setRumble(RumbleType.kLeftRumble, 0);
+    RobotContainer.m_joystick.setRumble(RumbleType.kRightRumble, 0);
+    m_timer.stop();
   }
 
   /** This function is called periodically during operator control. */

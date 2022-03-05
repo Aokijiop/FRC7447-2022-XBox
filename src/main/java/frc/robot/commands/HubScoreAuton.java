@@ -13,13 +13,12 @@ import frc.robot.subsystems.Dumper;
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class HubScoreAuton extends SequentialCommandGroup {
-  Wait m_wait;
-
   /** Creates a new TerminalSideScoreAuton. */
   public HubScoreAuton(DriveTrain dt, Dumper d) { 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    m_wait = new Wait(3.0f);
-    addCommands(new DumperVomit(d).raceWith(m_wait), new ParallelCommandGroup(new DumperLower(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, 2.9464));
+    addCommands(new DumperVomit(d).raceWith(new Wait(2.5f)), new DriveToDistance(dt, -0.05f), new ParallelCommandGroup(new DumperLower(d), new TurnToAngle(dt, 180.0f)), new DriveToDistance(dt, 2.9464));
+
+    // Testing
   }
 }

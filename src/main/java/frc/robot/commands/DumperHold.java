@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 
 public class DumperHold extends CommandBase {
   Dumper m_dumper;
@@ -32,7 +33,7 @@ public class DumperHold extends CommandBase {
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
     }
 
-    m_dumper.passiveSpin(0.15f);
+    m_dumper.passiveSpin(RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger)));
   }
 
   // Called once the command ends or is interrupted.
