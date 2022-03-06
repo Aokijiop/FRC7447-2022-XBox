@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
@@ -41,6 +43,7 @@ public class DumperMove extends CommandBase {
         if (timer.get() >= 1.7f) {
           m_dumper.isUp();
           finish = true;
+          m_dumper.SetToCoast();
         }
         else {
           m_dumper.moveArm(Constants.dumperUpSpeed);
@@ -52,6 +55,7 @@ public class DumperMove extends CommandBase {
         if (timer.get() >= 1.4f) {
           m_dumper.isDown();
           finish = true;
+          m_dumper.SetToBrake();
         }
         else {
           m_dumper.moveArm(Constants.dumperDownSpeed);

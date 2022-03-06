@@ -26,12 +26,12 @@ public class DumperHold extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // if(m_dumper.armIsUp()){
-    //   m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
-    // }
-    if(!m_dumper.armIsUp()){
-      m_dumper.moveArm(Constants.dumperHoldDownSpeed);
+    if(m_dumper.armIsUp()){
+      m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
     }
+    // if(!m_dumper.armIsUp()){
+    //   m_dumper.moveArm(Constants.dumperHoldDownSpeed);
+    // }
 
     m_dumper.passiveSpin(RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger)));
   }
