@@ -6,6 +6,7 @@
 
 // import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+// import frc.robot.Constants;
 // import frc.robot.subsystems.DriveTrain;
 // import frc.robot.subsystems.Dumper;
 
@@ -17,6 +18,13 @@
 //   public TimedLeftBackDoubleScoreAuton(DriveTrain dt, Dumper d) {
 //     // Add your commands in the addCommands() call, e.g.
 //     // addCommands(new FooCommand(), new BarCommand());
-//     addCommands(new ParallelCommandGroup(new DriveTimed(dt, SOMESPEED, SOMETIME), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(2.5f))), new TurnTimed(dt, SOMESPEED, SOMETIME), new DriveTimed(dt, SOMESPEED, SOMETIME), new ParallelCommandGroup(new TurnTimed(dt, SOMESPEED, SOMETIME), new DumperMove(d)), new DumperVomit(d).raceWith(new Wait(3.0f)), new TurnTimed(dt, SOMESPEED, SOMETIME), new DriveTimed(dt, SOMESPEED, SOMETIME));
+//     addCommands(new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 2.5f), new DumperMove(d), new DumperIntake(d).raceWith(new Wait(2.5f))), 
+//         new TurnTimed(dt, SOMESPEED, SOMETIME), 
+//         new DriveTimed(dt, SOMESPEED, SOMETIME), 
+//         new ParallelCommandGroup(new TurnTimed(dt, SOMESPEED, SOMETIME), new DumperMove(d)), 
+//         new DumperVomit(d).raceWith(new Wait(3.0f)), 
+//         new TurnTimed(dt, SOMESPEED, SOMETIME), 
+//         new DriveTimed(dt, SOMESPEED, SOMETIME)
+//     );
 //   }
 // }
