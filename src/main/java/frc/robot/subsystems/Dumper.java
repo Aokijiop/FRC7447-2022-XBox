@@ -67,6 +67,14 @@ public class Dumper extends SubsystemBase {
     isUp = true;
   }
 
+  public void SetToCoast(){
+    m_dumperArm.setIdleMode(IdleMode.kCoast);
+  }
+
+  public void SetToBrake(){
+    m_dumperArm.setIdleMode(IdleMode.kBrake);
+  }
+
   public boolean armIsUp() {
     return isUp;
   }
