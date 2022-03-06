@@ -29,6 +29,8 @@ public final class Constants {
     public static final int leftEncoderB = 0;
     public static final int rightEncoderA = 2;
     public static final int rightEncoderB = 3;
+    public static final int bottomLimitSwitch = 4;
+    public static final int topLimitSwitch = 5;
 
     // Time Values for Time-Based Commands
     public static final double drive_fwd_time = 3.0;
@@ -37,9 +39,10 @@ public final class Constants {
     public static final double mSpeed = 0.7;
     public static final double tSpeed = 0.5;
     public static final double speedBoost = 0.95;
-    public static final double tSpeedBoost = 0.85;
+    public static final double tSpeedBoost = 0.7;
     public static final double autonSpeed = 0.7;
     public static final double autonTSpeed = 0.5;
+    public static final double turn180Time = 2.0f;
 
     /*
     Timer values(ADJUST LATER, JUST ASSUME FOR CONSISTENCY):
@@ -55,6 +58,7 @@ public final class Constants {
     public static final double dumperRetch = -1.0;
     public static final double dumperUpSpeed =  2.0;
     public static final double dumperDownSpeed = -2.0;
+    public static final double dumperDownSlowSpeed = 0.7;
     public static final double dumperHoldUpSpeed = 0.3;
     public static final double dumperHoldDownSpeed = -0.3;
     

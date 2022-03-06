@@ -19,15 +19,20 @@ public class DumperVomit extends CommandBase {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    m_dumper.checkArmPosition();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     m_dumper.intakeOuttake(RobotContainer.m_joystick, Constants.dumperRetch);
 
-    if(!m_dumper.armIsUp()){
+    if (m_dumper.getArmPosition() == -1){
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
+    }
+    else if (m_dumper.getArmPosition() == 1) {
+      m_dumper.moveArm(Constants.dumperHoldUpSpeed);
     }
   }
 

@@ -4,8 +4,6 @@
 
 package frc.robot.commands;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
@@ -22,15 +20,14 @@ public class DumperMove extends CommandBase {
     m_dumper = d;
     addRequirements(m_dumper);
     timer = new Timer();
-    m_dumper.isUp();
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_dumper.checkArmPosition();
     timer.reset();
     timer.start();
-    System.out.println("isUp: " + m_dumper.armIsUp());
     finish = false;
     System.out.println("initialized move");
   }
@@ -39,25 +36,27 @@ public class DumperMove extends CommandBase {
   @Override
   public void execute() {
     // moves dumper up
-    if(!m_dumper.armIsUp()) {
+    if(m_dumper.getArmPosition() == -1) {
         if (timer.get() >= 1.7f) {
           m_dumper.isUp();
+          m_dumper.setToBrake();
           finish = true;
-          m_dumper.SetToCoast();
         }
         else {
+          m_dumper.setToCoast();
           m_dumper.moveArm(Constants.dumperUpSpeed);
           System.out.println("Moving upppp");
         }
     }
-    //moves dumper down 
-    else if(m_dumper.armIsUp()) {
+    // moves dumper down 
+    else if(m_dumper.getArmPosition() == 1) {
         if (timer.get() >= 1.4f) {
           m_dumper.isDown();
+          m_dumper.setToBrake();
           finish = true;
-          m_dumper.SetToBrake();
         }
         else {
+          m_dumper.setToCoast();
           m_dumper.moveArm(Constants.dumperDownSpeed);
           System.out.println("moving downnnnnn!!");
         }

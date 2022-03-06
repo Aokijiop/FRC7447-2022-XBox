@@ -15,12 +15,14 @@ import frc.robot.commands.DriveTimed;
 import frc.robot.commands.DriveManually;
 import frc.robot.commands.DumperIntake;
 import frc.robot.commands.DumperLower;
+import frc.robot.commands.DumperLowerSlow;
 //import frc.robot.commands.DumperLower;
 //import frc.robot.commands.DumperRaise;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.EncoderTest;
 import frc.robot.commands.LeftBackScoreAuton;
 import frc.robot.commands.DumperMove;
+import frc.robot.commands.DumperMoveLimitSwitch;
 import frc.robot.commands.DumperRaise;
 import frc.robot.commands.RightBackScoreAuton;
 import frc.robot.commands.TurnToAngle;
@@ -50,10 +52,11 @@ public class RobotContainer {
   private final DumperVomit m_dumperVomit;
   private final DumperRaise m_dumperMoveMotorUp;
   private final DumperLower m_dumperMoveMotorDown;
-  private final DumperMove m_dumperMove;
+  private final DumperMoveLimitSwitch m_dumperMoveLimitSwitch;
   private final BoostBoolean m_boost;
   private final DumperHold m_dumperHold;
   private final EncoderTest m_encoderTest;
+  private final DumperLowerSlow m_dumperLowerSlow;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -115,9 +118,10 @@ public class RobotContainer {
     m_dumperVomit = new DumperVomit(m_dumper);
     m_dumperMoveMotorDown = new DumperLower(m_dumper);
     m_dumperMoveMotorUp = new DumperRaise(m_dumper);
-    m_dumperMove = new DumperMove(m_dumper);
+    m_dumperMoveLimitSwitch = new DumperMoveLimitSwitch(m_dumper);
     m_boost = new BoostBoolean(m_driveTrain);
     m_encoderTest = new EncoderTest(m_driveTrain);
+    m_dumperLowerSlow = new DumperLowerSlow(m_dumper);
  
 
     // Turn to Angle Commands
@@ -176,18 +180,19 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // bButton.toggleWhenPressed(m_driveForwardTimed, false);
-    RButton.toggleWhenPressed(m_dumperMove);
+    RButton.toggleWhenPressed(m_dumperMoveLimitSwitch);
     leftJoystickPress.whenHeld(m_boost);
     rightJoystickPress.whenHeld(m_boost);
+    yButton.toggleWhenPressed(m_dumperLowerSlow);
     // bButton.toggleWhenPressed(m_encoderTest);
-    // pov0.toggleWhenPressed(m_cancelTurnTo);
-    // pov45.toggleWhenPressed(m_turnTo45);
-    // pov90.toggleWhenPressed(m_turnTo90);
-    // pov135.toggleWhenPressed(m_turnTo135);
-    // pov180.toggleWhenPressed(m_turnTo180);
-    // pov225.toggleWhenPressed(m_turnTo45cc);
-    // pov270.toggleWhenPressed(m_turnTo90cc);
-    // pov315.toggleWhenPressed(m_turnTo135cc);
+    pov0.toggleWhenPressed(m_cancelTurnTo);
+    pov45.toggleWhenPressed(m_turnTo45);
+    pov90.toggleWhenPressed(m_turnTo90);
+    pov135.toggleWhenPressed(m_turnTo135);
+    pov180.toggleWhenPressed(m_turnTo180);
+    pov225.toggleWhenPressed(m_turnTo45cc);
+    pov270.toggleWhenPressed(m_turnTo90cc);
+    pov315.toggleWhenPressed(m_turnTo135cc);
   }
 
   /**

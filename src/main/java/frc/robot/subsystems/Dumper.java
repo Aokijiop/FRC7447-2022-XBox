@@ -12,6 +12,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -21,13 +22,17 @@ public class Dumper extends SubsystemBase {
   WPI_VictorSPX m_dumperIntakeOuttake;
   CANSparkMax m_dumperArm;
   RelativeEncoder m_armEncoder;
-  private boolean isUp;
+  private int position;
+  DigitalInput m_topLimitSwitch;
+  DigitalInput m_bottomLimitSwitch;
 
   public Dumper() {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);
     m_dumperIntakeOuttake.setNeutralMode(NeutralMode.Brake);
     m_dumperArm = new CANSparkMax(Constants.dumperArmPort, MotorType.kBrushless);
     m_armEncoder = m_dumperArm.getEncoder();
+    m_topLimitSwitch = new DigitalInput(Constants.topLimitSwitch);
+    m_bottomLimitSwitch = new DigitalInput(Constants.bottomLimitSwitch);
     }
 
   @Override
@@ -60,22 +65,66 @@ public class Dumper extends SubsystemBase {
   }
 
   public void isDown() {
-    isUp  = false;
+    position = -1;
   }
 
-  public void isUp(){
-    isUp = true;
+  public void isUp() {
+    position = 1;
   }
 
-  public void SetToCoast(){
+  public void isMiddle() {
+    position = 0;
+  }
+
+  public void checkArmPosition() {
+    if (m_topLimitSwitch.get()) {
+      isUp();
+    }
+    else if (m_bottomLimitSwitch.get()) {
+      isDown();
+    }
+    else {
+      isMiddle();
+    }
+  }
+
+  public int getArmPosition() {
+    return position;
+  }
+
+  public DigitalInput getTopSwitch() {
+    return m_topLimitSwitch;
+  }
+
+  public DigitalInput getBottomSwitch() {
+    return m_bottomLimitSwitch;
+  }
+
+  public void dumperLower() {
+    if (m_bottomLimitSwitch.get()) {
+      setToBrake();
+      isDown();
+    }
+    else {
+      moveArm(Constants.dumperDownSpeed);
+    }
+  }
+
+  public void dumperRaise() {
+    if (m_topLimitSwitch.get()) {
+      setToBrake();
+      isUp();
+    }
+    else {
+      moveArm(Constants.dumperUpSpeed);
+    }
+  }
+
+  public void setToCoast(){
     m_dumperArm.setIdleMode(IdleMode.kCoast);
   }
 
-  public void SetToBrake(){
+  public void setToBrake(){
     m_dumperArm.setIdleMode(IdleMode.kBrake);
-  }
-
-  public boolean armIsUp() {
-    return isUp;
   }
 }

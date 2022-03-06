@@ -18,14 +18,16 @@ public class TimedCenterBackDoubleScoreAuton extends SequentialCommandGroup {
   public TimedCenterBackDoubleScoreAuton(DriveTrain dt, Dumper d) { 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ParallelCommandGroup(new DumperMove(d), new DriveTimed(dt, Constants.autonSpeed, 3.0f), new DumperIntake(d).raceWith(new Wait(3.0f))), 
-        new ParallelCommandGroup(new DumperMove(d), new TurnTimed(dt, Constants.autonTSpeed, 2.0f)), 
-        new DriveTimed(dt, Constants.autonSpeed, 2.5f), 
-        new TurnTimed(dt, Constants.autonTSpeed, 0.75f), 
+    addCommands(new ParallelCommandGroup(new DumperMoveLimitSwitch(d), new DriveTimed(dt, Constants.autonSpeed, 3.0f), new DumperIntake(d).raceWith(new Wait(3.0f))), 
+        new ParallelCommandGroup(new DumperMoveLimitSwitch(d), new TurnTimed(dt, Constants.autonTSpeed, Constants.turn180Time)), 
+        new DriveTimed(dt, Constants.autonSpeed, 2.0f), 
+        new TurnTimed(dt, -Constants.autonTSpeed, 0.75f), 
         new DriveTimed(dt, Constants.autonSpeed, 0.02f),
         new DumperVomit(d).raceWith(new Wait(2.0f)), 
         new DriveTimed(dt, Constants.autonSpeed, -0.02f),
-        new ParallelCommandGroup(new DumperMove(d), new TurnTimed(dt, Constants.autonTSpeed, 2.0f))
+        new ParallelCommandGroup(new DumperMoveLimitSwitch(d), new TurnTimed(dt, Constants.autonTSpeed, Constants.turn180Time))
     );
+
+    // Testing
   }
 }

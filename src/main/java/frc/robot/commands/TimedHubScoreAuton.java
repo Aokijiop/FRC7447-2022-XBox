@@ -20,7 +20,9 @@ public class TimedHubScoreAuton extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new DumperVomit(d).raceWith(new Wait(2.5f)), 
       new DriveTimed(dt, -Constants.autonSpeed, 0.02f),
-      new ParallelCommandGroup(new DumperMove(d), new DriveTimed(dt, -Constants.autonSpeed, 3.0f))
+      new ParallelCommandGroup(new DumperMoveLimitSwitch(d), new DriveTimed(dt, -Constants.autonSpeed, 3.0f))
     );
+
+    // Testing
   }
 }

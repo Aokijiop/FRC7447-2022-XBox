@@ -19,7 +19,7 @@ public class HubScoreAuton extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new DumperVomit(d).raceWith(new Wait(2.5f)), 
       new DriveToDistance(dt, -0.05f), 
-      new ParallelCommandGroup(new DumperLower(d), new TurnToAngle(dt, 180.0f)), 
+      new ParallelCommandGroup(new DumperMoveLimitSwitch(d), new TurnToAngle(dt, 180.0f)), 
       new DriveToDistance(dt, 2.9464)
     );
 

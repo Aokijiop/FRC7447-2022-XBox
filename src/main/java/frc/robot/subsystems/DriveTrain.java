@@ -57,9 +57,9 @@ public class DriveTrain extends SubsystemBase {
   Encoder m_rightEncoder;
 
   // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPt = 0.0;
-  static final double kIt = 0.0;
-  static final double kDt = 0.0;
+  static final double kPt = 0.012;
+  static final double kIt = 0.00;
+  static final double kDt = 0.00;
   
   // Turn Feedforward Gains
   static final double kSt = 0.0;
@@ -90,10 +90,10 @@ public class DriveTrain extends SubsystemBase {
     m_rightDistanceController = new PIDController(kPrd, kIrd, kDrd);
     m_turnController = new PIDController(kPt, kIt, kDt);
 
-    // Feedforward Controllers
-    m_turnFeedforward = new SimpleMotorFeedforward(kSt, kVt);
-    m_rightDTDFeedforward = new SimpleMotorFeedforward(kSrd, kVrd);
-    m_leftDTDFeedforward = new SimpleMotorFeedforward(kSld, kVld);
+    // // Feedforward Controllers
+    // m_turnFeedforward = new SimpleMotorFeedforward(kSt, kVt);
+    // m_rightDTDFeedforward = new SimpleMotorFeedforward(kSrd, kVrd);
+    // m_leftDTDFeedforward = new SimpleMotorFeedforward(kSld, kVld);
 
     // Differential Drive
     m_leftFront = new WPI_VictorSPX(Constants.leftFront);
@@ -121,7 +121,7 @@ public class DriveTrain extends SubsystemBase {
 
     m_left = new MotorControllerGroup(m_leftFront, m_leftBack);
     m_right = new MotorControllerGroup(m_rightFront, m_rightBack);
-    m_right.setInverted(true);
+    m_left.setInverted(true);
 
     m_drive = new DifferentialDrive(m_left, m_right);
 
@@ -199,7 +199,7 @@ public class DriveTrain extends SubsystemBase {
   // Other Commands
   // Might need to manually add a negative sign later if invert doesn't work
   public void driveManually(XboxController m_joystick, double speed, double turnSpeed) {
-    m_drive.arcadeDrive(-m_joystick.getRawAxis(Constants.y_axis) * speed, m_joystick.getRawAxis(Constants.z_axis) * turnSpeed); 
+    m_drive.arcadeDrive(m_joystick.getRawAxis(Constants.y_axis) * speed, -m_joystick.getRawAxis(Constants.z_axis) * turnSpeed); 
   }
 
   public void activateBoostBoolean() {
