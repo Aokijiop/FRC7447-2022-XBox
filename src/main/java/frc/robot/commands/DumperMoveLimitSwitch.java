@@ -22,6 +22,7 @@ public class DumperMoveLimitSwitch extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    finish = false;
     m_dumper.checkArmPosition();
   }
 
@@ -29,7 +30,7 @@ public class DumperMoveLimitSwitch extends CommandBase {
   @Override
   public void execute() {
     // If arm is down, move up
-    if(m_dumper.getArmPosition() == -1) {
+    if (m_dumper.getArmPosition() == -1) {
       if (m_dumper.getTopSwitch().get()) {
         m_dumper.isUp();
         m_dumper.setToBrake();

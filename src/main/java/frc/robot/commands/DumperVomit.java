@@ -6,12 +6,12 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.Dumper;
 
 public class DumperVomit extends CommandBase {
-  /** Creates a new DumperVomit. */
   Dumper m_dumper;
+
+  /** Creates a new DumperVomit. */
   public DumperVomit(Dumper d) {
     m_dumper = d;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -26,7 +26,7 @@ public class DumperVomit extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumper.intakeOuttake(RobotContainer.m_joystick, Constants.dumperRetch);
+    m_dumper.intakeOuttake(Constants.dumperRetch);
 
     if (m_dumper.getArmPosition() == -1){
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);

@@ -20,7 +20,7 @@ public class TimedRightBackScoreAuton extends SequentialCommandGroup {
         new DumperVomit(d).raceWith(new Wait(2.5f)), 
         new DriveTimed(dt, -Constants.autonSpeed, 3.0f)
     );
-    // drives to center from back of tarmac, dumps ball into center, drives off of tarmac from center
-    // static values are not definite; just random bullshit lol
+    
+    // Testing
   }
 }

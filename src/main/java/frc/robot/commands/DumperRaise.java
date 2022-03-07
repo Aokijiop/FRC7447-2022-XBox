@@ -32,7 +32,7 @@ public class DumperRaise extends CommandBase {
   public void execute() {
     if (m_dumper.getTopSwitch().get()) {
       m_dumper.setToBrake();
-      m_dumper.isDown();
+      m_dumper.isUp();
       finish = true;
     }
     else {
@@ -43,7 +43,6 @@ public class DumperRaise extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_dumper.setToBrake();
     m_dumper.stopArm();
   }
 

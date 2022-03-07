@@ -21,10 +21,13 @@ import frc.robot.commands.DumperLowerSlow;
 import frc.robot.commands.DumperVomit;
 import frc.robot.commands.EncoderTest;
 import frc.robot.commands.LeftBackScoreAuton;
+import frc.robot.commands.LimitSwitchTest;
 import frc.robot.commands.DumperMove;
 import frc.robot.commands.DumperMoveLimitSwitch;
 import frc.robot.commands.DumperRaise;
 import frc.robot.commands.RightBackScoreAuton;
+import frc.robot.commands.TimedCenterBackDoubleScoreAuton;
+import frc.robot.commands.TimedHubScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
@@ -57,6 +60,7 @@ public class RobotContainer {
   private final DumperHold m_dumperHold;
   private final EncoderTest m_encoderTest;
   private final DumperLowerSlow m_dumperLowerSlow;
+  private final LimitSwitchTest m_limitSwitchTest;
 
   // Turn to Angle Commands
   private final TurnToAngle m_cancelTurnTo;
@@ -70,6 +74,8 @@ public class RobotContainer {
 
   // Autonomous Commands
   private final HubScoreAuton m_hubScoreAuton;
+  private final TimedHubScoreAuton m_timedHubScoreAuton;
+  private final TimedCenterBackDoubleScoreAuton m_timedCenterBackDoubleScoreAuton;
   private final RightBackScoreAuton m_rBackScoreAuton;
   private final LeftBackScoreAuton m_lBackScoreAuton;
 
@@ -122,6 +128,7 @@ public class RobotContainer {
     m_boost = new BoostBoolean(m_driveTrain);
     m_encoderTest = new EncoderTest(m_driveTrain);
     m_dumperLowerSlow = new DumperLowerSlow(m_dumper);
+    m_limitSwitchTest = new LimitSwitchTest(m_dumper);
  
 
     // Turn to Angle Commands
@@ -136,18 +143,22 @@ public class RobotContainer {
 
     // Autonomous Commands
     m_hubScoreAuton = new HubScoreAuton(m_driveTrain, m_dumper);
+    m_timedHubScoreAuton = new TimedHubScoreAuton(m_dumper, m_driveTrain);
+    m_timedCenterBackDoubleScoreAuton = new TimedCenterBackDoubleScoreAuton(m_driveTrain, m_dumper);
     m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
     m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
+    SmartDashboard.putData("Autonomous", m_chooser);
     m_chooser.setDefaultOption("Hub Score", m_hubScoreAuton);
+    m_chooser.addOption("Timed Hub Score", m_timedHubScoreAuton);
     m_chooser.addOption("Right Back Score", m_rBackScoreAuton);
     m_chooser.addOption("Left Back Score", m_lBackScoreAuton);
-    SmartDashboard.putData("Autonomous", m_chooser);
+    
 
     // Controller
     m_joystick = new XboxController(Constants.joystickPort);
-    LButton = new JoystickButton(m_joystick, Constants.xButton);
+    xButton = new JoystickButton(m_joystick, Constants.xButton);
     aButton = new JoystickButton(m_joystick, Constants.aButton);
     bButton = new JoystickButton(m_joystick, Constants.bButton);
     yButton = new JoystickButton(m_joystick, Constants.yButton);
@@ -184,7 +195,8 @@ public class RobotContainer {
     leftJoystickPress.whenHeld(m_boost);
     rightJoystickPress.whenHeld(m_boost);
     yButton.toggleWhenPressed(m_dumperLowerSlow);
-    // bButton.toggleWhenPressed(m_encoderTest);
+    bButton.toggleWhenPressed(m_encoderTest);
+    xButton.toggleWhenPressed(m_timedCenterBackDoubleScoreAuton);
     pov0.toggleWhenPressed(m_cancelTurnTo);
     pov45.toggleWhenPressed(m_turnTo45);
     pov90.toggleWhenPressed(m_turnTo90);

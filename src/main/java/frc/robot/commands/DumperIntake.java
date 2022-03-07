@@ -7,7 +7,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class DumperIntake extends CommandBase {
   /** Creates a new MoveDumper. */
@@ -27,7 +26,7 @@ public class DumperIntake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_dumper.intakeOuttake(RobotContainer.m_joystick, Constants.dumperPower);
+    m_dumper.intakeOuttake(Constants.dumperPower);
 
     if (m_dumper.getArmPosition() == -1){
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);

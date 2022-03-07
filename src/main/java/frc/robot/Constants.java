@@ -42,7 +42,7 @@ public final class Constants {
     public static final double tSpeedBoost = 0.7;
     public static final double autonSpeed = 0.7;
     public static final double autonTSpeed = 0.5;
-    public static final double turn180Time = 2.0f;
+    public static final double turn180Time = 3.75f;
 
     /*
     Timer values(ADJUST LATER, JUST ASSUME FOR CONSISTENCY):

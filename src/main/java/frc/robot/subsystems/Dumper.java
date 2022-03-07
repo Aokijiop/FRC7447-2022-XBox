@@ -13,7 +13,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -40,8 +39,8 @@ public class Dumper extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void intakeOuttake(XboxController controller, double dumperVoltage) {
-    m_dumperIntakeOuttake.set(ControlMode.PercentOutput, controller.getRawAxis(Constants.LTrigger) * dumperVoltage);
+  public void intakeOuttake(double dumperVoltage) {
+    m_dumperIntakeOuttake.set(ControlMode.PercentOutput, dumperVoltage);
   }
 
   public void passiveSpin(double dumperVoltage) {
