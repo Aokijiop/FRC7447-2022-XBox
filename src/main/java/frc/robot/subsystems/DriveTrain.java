@@ -211,11 +211,11 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void driveTimed(double speed) {
-    m_drive.arcadeDrive(speed, 0);
+    m_drive.arcadeDrive(-speed, 0);
   }
 
   public void turnTimed(double angle) {
-    m_drive.arcadeDrive(0, angle);
+    m_drive.arcadeDrive(0, -angle);
   }
 
   public void stop() {

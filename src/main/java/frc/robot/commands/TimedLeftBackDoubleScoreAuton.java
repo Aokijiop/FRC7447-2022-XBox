@@ -19,13 +19,13 @@ public class TimedLeftBackDoubleScoreAuton extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(new DumperMoveLimitSwitch(d),
-        new ParallelCommandGroup(new DriveTimed(dt, -Constants.autonSpeed, 1.5f), new DumperIntake(d).raceWith(new Wait(1.75f))), 
-        new TurnTimed(dt, Constants.autonTSpeed, 3.2f), 
-        new DriveTimed(dt, -Constants.autonSpeed, 1.5f), 
-        new ParallelCommandGroup(new TurnTimed(dt, Constants.autonTSpeed, 0.75f), new DumperMoveLimitSwitch(d)), 
-        new DriveTimed(dt, -Constants.autonSpeed, 0.5f),
-        new DumperVomit(d).raceWith(new Wait(2.0f)), 
+        new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 1.5f), new DumperIntake(d).raceWith(new Wait(1.75f))), 
+        new TurnTimed(dt, -Constants.autonTSpeed, 3.2f), 
+        new DriveTimed(dt, Constants.autonSpeed, 2.0f), 
+        new ParallelCommandGroup(new TurnTimed(dt, -Constants.autonTSpeed, 0.6f), new DumperMoveLimitSwitch(d)), 
         new DriveTimed(dt, Constants.autonSpeed, 0.5f),
+        new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 0.4f), new DumperVomit(d).raceWith(new Wait(2.0f))), 
+        new DriveTimed(dt, -Constants.autonSpeed, 0.5f),
         new TurnTimed(dt, Constants.autonTSpeed, Constants.turn180Time)
     );
 

@@ -22,6 +22,6 @@ public class TimedHubScoreAuton extends SequentialCommandGroup {
       new DriveTimed(dt, Constants.autonSpeed, 1.90f)
     );
 
-    // Testing
+    // Complete
   }
 }
