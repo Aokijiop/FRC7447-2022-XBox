@@ -14,7 +14,7 @@ import frc.robot.subsystems.Dumper;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class TimedLeftBackScoreAuton extends SequentialCommandGroup {
   public TimedLeftBackScoreAuton(DriveTrain dt, Dumper d) {
-    addCommands(new DriveTimed(dt, Constants.autonSpeed, 0.75f), 
+    addCommands(new DriveTimed(dt, Constants.autonSpeed, 1.5f), 
         new TurnTimed(dt, -Constants.autonTSpeed, 0.5f), 
         new DriveTimed(dt, Constants.autonSpeed, 0.02f),
         new DumperVomit(d).raceWith(new Wait(2.5f)), 
