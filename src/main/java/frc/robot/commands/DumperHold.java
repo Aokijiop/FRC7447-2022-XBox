@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
@@ -23,6 +24,8 @@ public class DumperHold extends CommandBase {
   @Override
   public void initialize() {
     m_dumper.checkArmPosition();
+    SmartDashboard.putData(m_dumper.getTopSwitch());
+    SmartDashboard.putData(m_dumper.getBottomSwitch());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,6 +42,8 @@ public class DumperHold extends CommandBase {
     else {
       m_dumper.passiveSpin(RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger)));
     }
+    SmartDashboard.putData(m_dumper.getTopSwitch());
+    SmartDashboard.putData(m_dumper.getBottomSwitch());
   }
 
   // Called once the command ends or is interrupted.
