@@ -28,6 +28,10 @@ import frc.robot.commands.DumperRaise;
 import frc.robot.commands.RightBackScoreAuton;
 import frc.robot.commands.TimedCenterBackDoubleScoreAuton;
 import frc.robot.commands.TimedHubScoreAuton;
+import frc.robot.commands.TimedLeftBackDoubleScoreAuton;
+import frc.robot.commands.TimedLeftBackScoreAuton;
+import frc.robot.commands.TimedRightBackDoubleScoreAuton;
+import frc.robot.commands.TimedRightBackScoreAuton;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Dumper;
@@ -74,10 +78,16 @@ public class RobotContainer {
 
   // Autonomous Commands
   private final HubScoreAuton m_hubScoreAuton;
-  private final TimedHubScoreAuton m_timedHubScoreAuton;
-  private final TimedCenterBackDoubleScoreAuton m_timedCenterBackDoubleScoreAuton;
   private final RightBackScoreAuton m_rBackScoreAuton;
   private final LeftBackScoreAuton m_lBackScoreAuton;
+
+  // Timed Autonomous Commands
+  private final TimedCenterBackDoubleScoreAuton m_timedCenterBackDoubleScoreAuton;
+  private final TimedHubScoreAuton m_timedHubScoreAuton;
+  private final TimedLeftBackDoubleScoreAuton m_timedLeftBackDoubleScoreAuton;
+  private final TimedLeftBackScoreAuton m_timedLeftBackScoreAuton;
+  private final TimedRightBackDoubleScoreAuton m_timedRightBackDoubleScoreAuton;
+  private final TimedRightBackScoreAuton m_timedRightBackScoreAuton;
 
   // Autonomous Command Chooser
   SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -143,17 +153,25 @@ public class RobotContainer {
 
     // Autonomous Commands
     m_hubScoreAuton = new HubScoreAuton(m_driveTrain, m_dumper);
-    m_timedHubScoreAuton = new TimedHubScoreAuton(m_dumper, m_driveTrain);
-    m_timedCenterBackDoubleScoreAuton = new TimedCenterBackDoubleScoreAuton(m_driveTrain, m_dumper);
     m_rBackScoreAuton = new RightBackScoreAuton(m_driveTrain, m_dumper);
     m_lBackScoreAuton = new LeftBackScoreAuton(m_driveTrain, m_dumper);
+
+    // Timed Autonomous Commands
+    m_timedCenterBackDoubleScoreAuton = new TimedCenterBackDoubleScoreAuton(m_driveTrain, m_dumper);
+    m_timedHubScoreAuton = new TimedHubScoreAuton(m_dumper, m_driveTrain);
+    m_timedLeftBackDoubleScoreAuton = new TimedLeftBackDoubleScoreAuton(m_driveTrain, m_dumper);
+    m_timedLeftBackScoreAuton = new TimedLeftBackScoreAuton(m_driveTrain, m_dumper);
+    m_timedRightBackDoubleScoreAuton = new TimedRightBackDoubleScoreAuton(m_driveTrain, m_dumper);
+    m_timedRightBackScoreAuton = new TimedRightBackScoreAuton(m_driveTrain, m_dumper);
     
     // Autonomous Command Chooser
     SmartDashboard.putData("Autonomous", m_chooser);
-    m_chooser.setDefaultOption("Hub Score", m_hubScoreAuton);
-    m_chooser.addOption("Timed Hub Score", m_timedHubScoreAuton);
-    m_chooser.addOption("Right Back Score", m_rBackScoreAuton);
-    m_chooser.addOption("Left Back Score", m_lBackScoreAuton);
+    m_chooser.addOption("Timed Center Back Double Score", m_timedCenterBackDoubleScoreAuton);
+    m_chooser.setDefaultOption("Timed Hub Score", m_timedHubScoreAuton);
+    m_chooser.addOption("Timed Left Back Double Score", m_timedLeftBackDoubleScoreAuton);
+    m_chooser.addOption("Timed Left Back Score", m_timedLeftBackScoreAuton);
+    m_chooser.addOption("Timed Right Back Double Score", m_timedRightBackDoubleScoreAuton);
+    m_chooser.addOption("Timed Right Back Score", m_timedRightBackScoreAuton);
     
 
     // Controller

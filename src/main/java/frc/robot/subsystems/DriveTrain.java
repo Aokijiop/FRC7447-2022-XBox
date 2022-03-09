@@ -57,7 +57,7 @@ public class DriveTrain extends SubsystemBase {
   Encoder m_rightEncoder;
 
   // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
-  static final double kPt = 0.012;
+  static final double kPt = 0.007;
   static final double kIt = 0.00;
   static final double kDt = 0.00;
   

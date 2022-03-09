@@ -18,7 +18,8 @@ public class TimedRightBackDoubleScoreAuton extends SequentialCommandGroup {
   public TimedRightBackDoubleScoreAuton (DriveTrain dt, Dumper d) { 
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 2.0f),  new DumperMoveLimitSwitch(d), new DumperIntake(d).raceWith(new Wait(1.9f))), 
+    addCommands(new DumperMoveLimitSwitch(d),
+        new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 2.0f), new DumperIntake(d).raceWith(new Wait(1.9f))), 
         new DriveTimed(dt, -Constants.autonSpeed, 2.45f),
         new TurnTimed(dt, Constants.autonTSpeed, Constants.turn180Time), 
         new DriveTimed(dt, Constants.autonSpeed, 2.5f), 

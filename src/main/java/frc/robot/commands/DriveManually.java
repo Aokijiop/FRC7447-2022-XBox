@@ -32,8 +32,7 @@ public class DriveManually extends CommandBase {
     } else {
       m_driveTrain.driveManually(RobotContainer.m_joystick, Constants.speedBoost, Constants.tSpeedBoost);
     }
-    SmartDashboard.putNumber("Movement speed", RobotContainer.m_joystick.getRawAxis(Constants.y_axis));
-
+    SmartDashboard.putNumber("Movement speed: ", RobotContainer.m_joystick.getRawAxis(Constants.y_axis));
     }
 
   // Called once the command ends or is interrupted.

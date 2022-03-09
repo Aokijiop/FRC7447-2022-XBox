@@ -28,7 +28,7 @@ public class DumperVomit extends CommandBase {
   public void execute() {
     m_dumper.intakeOuttake(Constants.dumperRetch);
 
-    if (m_dumper.getArmPosition() == -1){
+    if (m_dumper.getArmPosition() == -1) {
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
     }
     else if (m_dumper.getArmPosition() == 1) {
