@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -15,10 +16,10 @@ import frc.robot.subsystems.Dumper;
 public class TimedRightBackScoreAuton extends SequentialCommandGroup {
   public TimedRightBackScoreAuton(DriveTrain dt, Dumper d) {
     addCommands(new DriveTimed(dt, Constants.autonSpeed, 0.75f), 
-        new TurnTimed(dt, Constants.autonTSpeed, 0.5f), 
-        new DriveTimed(dt, Constants.autonSpeed, 0.02f),
-        new DumperVomit(d).raceWith(new Wait(2.5f)), 
-        new DriveTimed(dt, -Constants.autonSpeed, 3.0f)
+        new TurnTimed(dt, Constants.autonTSpeed, 0.625f), 
+        new ParallelCommandGroup(new DriveTimed(dt, Constants.autonSpeed, 0.2f),
+        new DumperVomit(d).raceWith(new Wait(2.0f))), 
+        new DriveTimed(dt, -Constants.autonSpeed, 7.0f)
     );
     
     // Testing
