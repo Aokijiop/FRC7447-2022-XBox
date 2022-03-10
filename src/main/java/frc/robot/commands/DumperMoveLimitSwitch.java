@@ -54,7 +54,7 @@ public class DumperMoveLimitSwitch extends CommandBase {
       if (m_dumper.getBottomSwitch().get()) {
         m_dumper.isDown();
         m_dumper.setToBrake();
-        Robot.rainbow();
+        Robot.dumperDownColor();;
         finish = true;
       }
       else {

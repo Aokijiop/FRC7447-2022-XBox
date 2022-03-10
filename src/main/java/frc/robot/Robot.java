@@ -220,8 +220,19 @@ public class Robot extends TimedRobot {
   }
 
   public static void dumperDownColor() {
+    int count = 0;
     for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-      
+      while (count < 5) {
+        m_ledBuffer.setRGB(i, 200, 78, 237);
+        count++;
+      }
+      while (count >= 5 && count < 10) {
+        m_ledBuffer.setRGB(i, 255, 255, 255);
+        count++;
+      }
+      if (count == 10) {
+        count = 0;
+      }
     }
   }
 }
