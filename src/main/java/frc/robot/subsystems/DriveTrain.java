@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -147,6 +148,16 @@ public class DriveTrain extends SubsystemBase {
   public void updateTurnMeasurement() {
     turnMeasurement = m_gyro.getAngle();
     System.out.println("Updating angle measurement");
+  }
+  
+  public void printEncoderInfo() {
+    SmartDashboard.putNumber("Right Encoder Count: ", m_rightEncoder.get());
+    SmartDashboard.putNumber("Right Encoder Distance: ", m_rightEncoder.getDistance());
+    SmartDashboard.putNumber("Right Encoder Rate: ", m_rightEncoder.getRate());
+
+    SmartDashboard.putNumber("Left Encoder Count: ", m_leftEncoder.get());
+    SmartDashboard.putNumber("Left Encoder Distance: ", m_leftEncoder.getDistance());
+    SmartDashboard.putNumber("Left Encoder Rate: ", m_leftEncoder.getRate());
   }
   
   public boolean atTurnSetpoint() {
