@@ -4,19 +4,23 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.Dumper;
 
 public class DumperMoveLimitSwitch extends CommandBase {
-  Dumper m_dumper;
+  private Dumper m_dumper;
   private boolean finish;
+  private Timer m_timer;
 
   /** Creates a new DumperMoveLimitSwitch. */
   public DumperMoveLimitSwitch(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
     addRequirements(m_dumper);
+    m_timer = new Timer();
   }
 
   // Called when the command is initially scheduled.
@@ -24,6 +28,8 @@ public class DumperMoveLimitSwitch extends CommandBase {
   public void initialize() {
     finish = false;
     m_dumper.checkArmPosition();
+    m_timer.reset();
+    m_timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -70,12 +76,17 @@ public class DumperMoveLimitSwitch extends CommandBase {
         System.out.println("Moving upppp");
       }
     }
+
+    if (m_timer.get() >= 2.0) {
+      finish = true;
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     m_dumper.stopArm();
+    m_timer.stop();
   }
 
   // Returns true when the command should end.

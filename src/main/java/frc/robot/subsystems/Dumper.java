@@ -18,12 +18,12 @@ import frc.robot.Constants;
 
 public class Dumper extends SubsystemBase {
   /** Creates a new Dumper. */
-  WPI_VictorSPX m_dumperIntakeOuttake;
-  CANSparkMax m_dumperArm;
-  RelativeEncoder m_armEncoder;
+  private WPI_VictorSPX m_dumperIntakeOuttake;
+  private CANSparkMax m_dumperArm;
+  private RelativeEncoder m_armEncoder;
   private int position;
-  DigitalInput m_topLimitSwitch;
-  DigitalInput m_bottomLimitSwitch;
+  private DigitalInput m_topLimitSwitch;
+  private DigitalInput m_bottomLimitSwitch;
 
   public Dumper() {
     m_dumperIntakeOuttake = new WPI_VictorSPX(Constants.dumperPort);

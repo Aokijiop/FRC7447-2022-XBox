@@ -24,6 +24,10 @@ public final class Constants {
     public static final int dumperPort = 4;
     public static final int dumperArmPort = 8;
 
+    // RGB Stuff
+    public static final int RGBPort = 9;
+    public static final int RGBLength = 30;
+
     // DIO Ports
     public static final int leftEncoderA = 1;
     public static final int leftEncoderB = 0;
@@ -83,7 +87,7 @@ public final class Constants {
     public static final double TTALeftVelocity = 0.0;
     public static final double TTARightVelocity = 0.0;
 
-    // Drie to Distance Velocity Setpoints
+    // Drive to Distance Velocity Setpoints
     public static final double DTDLeftVelocity = 0.0;
     public static final double DTDRightVelocity = 0.0;
 }

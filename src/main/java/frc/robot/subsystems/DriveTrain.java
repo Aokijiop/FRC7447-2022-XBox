@@ -19,42 +19,42 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   // Differential Drive
-  MotorControllerGroup m_left;
-  MotorControllerGroup m_right;
+  private MotorControllerGroup m_left;
+  private MotorControllerGroup m_right;
 
-  WPI_VictorSPX m_leftFront;
-  WPI_VictorSPX m_leftBack;
-  WPI_VictorSPX m_rightFront;
-  WPI_VictorSPX m_rightBack;
+  private WPI_VictorSPX m_leftFront;
+  private WPI_VictorSPX m_leftBack;
+  private WPI_VictorSPX m_rightFront;
+  private WPI_VictorSPX m_rightBack;
 
-  DifferentialDrive m_drive;
+  private DifferentialDrive m_drive;
 
   // Turn to Angle PID
-  PIDController m_turnController;
-  AHRS m_gyro;
-  double turnMeasurement;
+  private PIDController m_turnController;
+  private AHRS m_gyro;
+  private double turnMeasurement;
 
   // Drive to Distance PID (All units in meters)
-  PIDController m_leftDistanceController;
-  PIDController m_rightDistanceController;
-  double leftDisplacement;  
-  double rightDisplacement;
-  double wheelRadius = 0.0762f;
-  double encoderResolution = 360f;
+  private PIDController m_leftDistanceController;
+  private PIDController m_rightDistanceController;
+  private double leftDisplacement;  
+  private double rightDisplacement;
+  private double wheelRadius = 0.0762f;
+  private double encoderResolution = 360f;
 
   // Boost Boolean
   public boolean RButtonHeld = false;
 
   // TTA Feedforward
-  SimpleMotorFeedforward m_turnFeedforward; 
+  private SimpleMotorFeedforward m_turnFeedforward; 
 
   // DTD Feedforward
-  SimpleMotorFeedforward m_leftDTDFeedforward;
-  SimpleMotorFeedforward m_rightDTDFeedforward;
+  private SimpleMotorFeedforward m_leftDTDFeedforward;
+  private SimpleMotorFeedforward m_rightDTDFeedforward;
   
   // Encoders
-  Encoder m_leftEncoder;
-  Encoder m_rightEncoder;
+  private Encoder m_leftEncoder;
+  private Encoder m_rightEncoder;
 
   // Turn Controller Gains - TESTING GAINS - DO NOT DEPLOY. These will require tuning. Use the Ziegler-Nichols rule or the robot charatcerization tool.
   static final double kPt = 0.007;
