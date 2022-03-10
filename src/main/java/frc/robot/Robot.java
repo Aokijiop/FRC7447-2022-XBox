@@ -224,4 +224,14 @@ public class Robot extends TimedRobot {
       
     }
   }
+
+  public static void dumperUpColor() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      if (i % 2 == 0) {
+        m_ledBuffer.setRGB(i, 0, 0, 255);
+      } else {
+        m_ledBuffer.setRGB(i, 255, 255, 255);
+      }
+    }
+  }
 }
