@@ -36,8 +36,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  private AddressableLED m_led;
-  private AddressableLEDBuffer m_ledBuffer;
+  private static AddressableLED m_led;
+  private static AddressableLEDBuffer m_ledBuffer;
   private PowerDistribution m_PowerDistr;
   private Thread m_visionThread;
   private Timer m_timer;
@@ -203,7 +203,7 @@ public class Robot extends TimedRobot {
     }
   }
 
-  private void rainbow() {
+  public static void rainbow() {
     int m_rainbowFirstPixelHue = 1;
     // For every pixel
     for (var i = 0; i < m_ledBuffer.getLength(); i++) {
@@ -217,5 +217,11 @@ public class Robot extends TimedRobot {
     m_rainbowFirstPixelHue += 3;
     // Check bounds
     m_rainbowFirstPixelHue %= 180;
+  }
+
+  public static void dumperDownColor() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      
+    }
   }
 }
