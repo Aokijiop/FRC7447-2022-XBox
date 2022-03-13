@@ -17,13 +17,10 @@ import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.Dumper;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -40,7 +37,6 @@ public class Robot extends TimedRobot {
   private static AddressableLEDBuffer m_ledBuffer;
   private PowerDistribution m_PowerDistr;
   private Thread m_visionThread;
-  private Timer m_timer;
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -54,11 +50,8 @@ public class Robot extends TimedRobot {
     m_led = new AddressableLED(Constants.RGBPort);
     m_ledBuffer = new AddressableLEDBuffer(Constants.RGBLength);
     m_led.setLength(m_ledBuffer.getLength());
-    m_PowerDistr = new PowerDistribution(0, ModuleType.kCTRE);
-    m_timer = new Timer();
-
-    m_led.setData(m_ledBuffer);
     m_led.start();
+    m_PowerDistr = new PowerDistribution(0, ModuleType.kCTRE);
 
     m_visionThread = 
       new Thread(
@@ -140,7 +133,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledPeriodic() {
-    teamColors();
+    purpleOne();
   }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
@@ -167,15 +160,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_timer.reset();
-    m_timer.start();
-    while (m_timer.get() < 3.0f) {
-      RobotContainer.m_joystick.setRumble(RumbleType.kLeftRumble, 1);
-      RobotContainer.m_joystick.setRumble(RumbleType.kRightRumble, 1);
-    }
-    RobotContainer.m_joystick.setRumble(RumbleType.kLeftRumble, 0);
-    RobotContainer.m_joystick.setRumble(RumbleType.kRightRumble, 0);
-    m_timer.stop();
   }
 
   /** This function is called periodically during operator control. */
@@ -192,7 +176,7 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 
-  private void teamColors() {
+  public static void teamColors() {
     for (int i = 0; i < m_ledBuffer.getLength(); i++) {
       if (i % 2 == 0) {
         m_ledBuffer.setRGB(i, 66, 277, 245);
@@ -217,32 +201,121 @@ public class Robot extends TimedRobot {
     m_rainbowFirstPixelHue += 3;
     // Check bounds
     m_rainbowFirstPixelHue %= 180;
+    m_led.setData(m_ledBuffer);
   }
 
-  public static void dumperDownColor() {
-    int count = 0;
+  public static void purple() {
+    purpleOne();
+    m_led.setData(m_ledBuffer);
+    // purpleTwo();
+    // m_led.setData(m_ledBuffer);
+    // purpleThree();
+    // m_led.setData(m_ledBuffer);
+  }
+
+  public static void purpleOne() {
     for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-      while (count < 5) {
-        m_ledBuffer.setRGB(i, 200, 78, 237);
-        count++;
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 106, 0, 255);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 178, 75, 242);
       }
-      while (count >= 5 && count < 10) {
-        m_ledBuffer.setRGB(i, 255, 255, 255);
-        count++;
+      else {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
       }
-      if (count == 10) {
-        count = 0;
+    }
+    m_led.setData(m_ledBuffer);
+  }
+
+  public static void purpleTwo() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 106, 0, 255);
+      }
+      else {
+        m_ledBuffer.setRGB(i, 178, 75, 242);
       }
     }
   }
 
-  public static void dumperUpColor() {
+  public static void purpleThree() {
     for (int i = 0; i < m_ledBuffer.getLength(); i++) {
-      if (i % 2 == 0) {
-        m_ledBuffer.setRGB(i, 0, 0, 255);
-      } else {
-        m_ledBuffer.setRGB(i, 255, 255, 255);
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 178, 75, 242);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
       }
+      else {
+        m_ledBuffer.setRGB(i, 106, 0, 255);
+      }
+    }
+  }
+
+  public static void blue() {
+    blueOne();
+    m_led.setData(m_ledBuffer);
+    // blueTwo();
+    // m_led.setData(m_ledBuffer);
+    // blueThree();
+    // m_led.setData(m_ledBuffer);
+  }
+
+  public static void blueOne() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 0, 0, 255);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 5, 133, 255);;
+      }
+      else {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
+      }
+    }
+  }
+
+  public static void blueTwo() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 0, 0, 255);
+      }
+      else {
+        m_ledBuffer.setRGB(i, 5, 133, 255);
+      }
+    }
+  }
+
+  public static void blueThree() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      if (i % 3 == 0) {
+        m_ledBuffer.setRGB(i, 5, 133, 255);
+      } 
+      else if (i % 3 == 1) {
+        m_ledBuffer.setRGB(i, 180, 180, 180);
+      }
+      else {
+        m_ledBuffer.setRGB(i, 0, 0, 255);
+      }
+    }
+  }
+
+  public static void switchHit() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      m_ledBuffer.setRGB(i, 229, 97, 20);
+    }
+  }
+
+  public static void turnOff() {
+    for (int i = 0; i < m_ledBuffer.getLength(); i++) {
+      m_ledBuffer.setRGB(i, 0, 0, 0);
     }
   }
 }

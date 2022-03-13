@@ -77,6 +77,8 @@
       "/LiveWindow/Ungrouped/Victor SPX [4]": "Motor Controller",
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
       "/SmartDashboard/Autonomous": "String Chooser",
+      "/SmartDashboard/DigitalInput[4]": "Digital Input",
+      "/SmartDashboard/DigitalInput[5]": "Digital Input",
       "/SmartDashboard/Scheduler": "Scheduler"
     }
   }

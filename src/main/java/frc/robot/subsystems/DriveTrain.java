@@ -11,7 +11,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
+// import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -46,12 +46,12 @@ public class DriveTrain extends SubsystemBase {
   // Boost Boolean
   public boolean RButtonHeld = false;
 
-  // TTA Feedforward
-  private SimpleMotorFeedforward m_turnFeedforward; 
+  // // TTA Feedforward
+  // private SimpleMotorFeedforward m_turnFeedforward; 
 
-  // DTD Feedforward
-  private SimpleMotorFeedforward m_leftDTDFeedforward;
-  private SimpleMotorFeedforward m_rightDTDFeedforward;
+  // // DTD Feedforward
+  // private SimpleMotorFeedforward m_leftDTDFeedforward;
+  // private SimpleMotorFeedforward m_rightDTDFeedforward;
   
   // Encoders
   private Encoder m_leftEncoder;
@@ -149,6 +149,10 @@ public class DriveTrain extends SubsystemBase {
     turnMeasurement = m_gyro.getAngle();
     System.out.println("Updating angle measurement");
   }
+
+  public boolean atTurnSetpoint(double setpoint) {
+    return m_gyro.getAngle() == setpoint;
+  }
   
   public void printEncoderInfo() {
     SmartDashboard.putNumber("Right Encoder Count: ", m_rightEncoder.get());
@@ -213,6 +217,10 @@ public class DriveTrain extends SubsystemBase {
     m_drive.arcadeDrive(m_joystick.getRawAxis(Constants.y_axis) * speed, -m_joystick.getRawAxis(Constants.z_axis) * turnSpeed); 
   }
 
+  public void turn(double rotateSpeed) {
+    m_drive.arcadeDrive(0, -rotateSpeed);
+  }
+
   public void activateBoostBoolean() {
     RButtonHeld = true;
   }
@@ -227,6 +235,10 @@ public class DriveTrain extends SubsystemBase {
 
   public void turnTimed(double angle) {
     m_drive.arcadeDrive(0, -angle);
+  }
+
+  public double getAngle() {
+    return m_gyro.getAngle();
   }
 
   public void stop() {

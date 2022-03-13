@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Dumper;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class DumperHold extends CommandBase {
@@ -24,8 +25,9 @@ public class DumperHold extends CommandBase {
   @Override
   public void initialize() {
     m_dumper.checkArmPosition();
-    SmartDashboard.putData(m_dumper.getTopSwitch());
-    SmartDashboard.putData(m_dumper.getBottomSwitch());
+    if (m_dumper.getTopSwitch().get() || m_dumper.getBottomSwitch().get()) {
+      Robot.switchHit();
+    }
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -34,16 +36,20 @@ public class DumperHold extends CommandBase {
     if(m_dumper.getArmPosition() == 1){
       m_dumper.moveArm(Constants.dumperHoldUpSpeed); 
       m_dumper.passiveSpin(RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger)));
+      SmartDashboard.putNumber("Arm up: ", 1);
+      SmartDashboard.putNumber("Arm down: ", 0);
+      Robot.blue();
     }
     else if(m_dumper.getArmPosition() == -1) {
       m_dumper.moveArm(Constants.dumperHoldDownSpeed);
       m_dumper.passiveSpin(0.5 + RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger) * 1.5));
+      SmartDashboard.putNumber("Arm up: ", 0);
+      SmartDashboard.putNumber("Arm down: ", 1);
+      Robot.purple();
     }
     else {
       m_dumper.passiveSpin(RobotContainer.m_joystick.getRawAxis(Constants.RTrigger) - (RobotContainer.m_joystick.getRawAxis(Constants.LTrigger)));
     }
-    SmartDashboard.putData(m_dumper.getTopSwitch());
-    SmartDashboard.putData(m_dumper.getBottomSwitch());
   }
 
   // Called once the command ends or is interrupted.

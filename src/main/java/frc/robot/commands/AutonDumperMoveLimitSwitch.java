@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Dumper;
 
-public class DumperMoveLimitSwitch extends CommandBase {
+public class AutonDumperMoveLimitSwitch extends CommandBase {
   private Dumper m_dumper;
   private boolean finish;
   private Timer m_timer;
 
   /** Creates a new DumperMoveLimitSwitch. */
-  public DumperMoveLimitSwitch(Dumper d) {
+  public AutonDumperMoveLimitSwitch(Dumper d) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_dumper = d;
     addRequirements(m_dumper);
@@ -62,16 +62,16 @@ public class DumperMoveLimitSwitch extends CommandBase {
       }
     }
 
-    // If arm is middle, move up
+    // If arm is middle, move down
     else if (m_dumper.getArmPosition() == 0) {
-      if (m_dumper.getTopSwitch().get()) {
-        m_dumper.isUp();
+      if (m_dumper.getBottomSwitch().get()) {
+        m_dumper.isDown();
         m_dumper.setToBrake();
         finish = true;
       }
       else {
         m_dumper.setToCoast();
-        m_dumper.moveArm(Constants.dumperUpSpeed);
+        m_dumper.moveArm(Constants.dumperDownSpeed);
         System.out.println("Moving upppp");
       }
     }

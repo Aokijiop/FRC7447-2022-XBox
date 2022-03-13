@@ -25,8 +25,8 @@ public final class Constants {
     public static final int dumperArmPort = 8;
 
     // RGB Stuff
-    public static final int RGBPort = 9;
-    public static final int RGBLength = 30;
+    public static final int RGBPort = 8;
+    public static final int RGBLength = 48;
 
     // DIO Ports
     public static final int leftEncoderA = 1;
@@ -41,8 +41,8 @@ public final class Constants {
 
     // Speed Constants
     public static final double mSpeed = 0.7;
-    public static final double tSpeed = 0.5;
-    public static final double speedBoost = 0.95;
+    public static final double tSpeed = 0.55;
+    public static final double speedBoost = 0.97;
     public static final double tSpeedBoost = 0.7;
     public static final double autonSpeed = 0.7;
     public static final double autonTSpeed = 0.5;

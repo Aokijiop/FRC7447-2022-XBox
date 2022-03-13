@@ -15,7 +15,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class Dumper extends SubsystemBase {
   /** Creates a new Dumper. */
@@ -100,28 +99,7 @@ public class Dumper extends SubsystemBase {
     return m_bottomLimitSwitch;
   }
 
-  public void dumperLower() {
-    if (m_bottomLimitSwitch.get()) {
-      setToBrake();
-      isDown();
-    }
-    else {
-      moveArm(Constants.dumperDownSpeed);
-    }
-  }
-
-  public void dumperRaise() {
-    if (m_topLimitSwitch.get()) {
-      setToBrake();
-      isUp();
-      Robot.dumperUpColor();
-    }
-    else {
-      moveArm(Constants.dumperUpSpeed);
-    }
-  }
-
-  public void setToCoast(){
+  public void setToCoast() {
     m_dumperArm.setIdleMode(IdleMode.kCoast);
   }
 
